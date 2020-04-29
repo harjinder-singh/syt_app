@@ -112,7 +112,11 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else{
+                    SaveSharedPreference.setLoggedIn(getApplicationContext(), false, "");
                     Toast.makeText(getApplicationContext(), "Invalid Creds", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 }
 
             }
@@ -125,15 +129,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
     }
 
 
